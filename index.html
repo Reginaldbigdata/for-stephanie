@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Stephanie Ndanu</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: white;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 50px 40px;
+      max-width: 520px;
+      text-align: center;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+      animation: fadeIn 2s ease forwards;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    #typewriter {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      min-height: 180px;
+      white-space: pre-line;
+    }
+
+    .signature {
+      margin-top: 30px;
+      font-style: italic;
+      opacity: 0;
+      animation: textReveal 2s ease forwards;
+      animation-delay: 6s;
+    }
+
+    .final-btn {
+      margin-top: 35px;
+      padding: 12px 28px;
+      border-radius: 30px;
+      border: none;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      color: #2c5364;
+      font-size: 1rem;
+      cursor: pointer;
+      opacity: 0;
+      animation: textReveal 2s ease forwards;
+      animation-delay: 7.5s;
+    }
+
+    .final-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 20px;
+      color: #ff6b81;
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes fadeIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes textReveal {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 0; }
+      10% { opacity: 1; }
+      to { transform: translateY(-110vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="assets/music/piano.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="card">
+    <h1>Stephanie Ndanu</h1>
+    <div id="typewriter"></div>
+    <div class="signature">— With sincerity, from someone who cares</div>
+    <button class="final-btn" onclick="alert('This is only the beginning…')">
+      This is only the beginning…
+    </button>
+  </div>
+
+  <script>
+    // Typewriter Effect
+    const text = `In a world full of noise, you are my calm.
+In moments of doubt, you are my certainty.
+
+Your presence turns ordinary days into something meaningful,
+and simple moments into memories.
+
+This page exists for one reason —
+to remind you that you are deeply valued,
+genuinely admired,
+and incredibly special to me.`;
+
+    let index = 0;
+    const speed = 45;
+    const target = document.getElementById('typewriter');
+
+    function typeEffect() {
+      if (index < text.length) {
+        target.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, speed);
+      }
+    }
+
+    typeEffect();
+
+    // Floating hearts
+    const heartCount = 25;
+
+    for (let i = 0; i < heartCount; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 5 + Math.random() * 5 + 's';
+      heart.style.fontSize = 14 + Math.random() * 26 + 'px';
+      heart.style.animationDelay = Math.random() * 5 + 's';
+      document.body.appendChild(heart);
+    }
+
+    // Autoplay fix (browser interaction requirement)
+    document.addEventListener('click', () => {
+      const music = document.getElementById('bgMusic');
+      music.play();
+    }, { once: true });
+  </script>
+
+</body>
+</html>
